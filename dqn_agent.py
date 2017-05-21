@@ -82,7 +82,8 @@ class DQNAgent(object):
             self.huber_loss = tf.reduce_mean(tf.where(abs_diff < self.q_error_threshold, square_diff, linear_diff))
             self.trainable_variables = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="q_network")
             self.gradients = self.optimizer.compute_gradients(self.loss, var_list=self.trainable_variables)
-            self.train_op = self.optimizer.apply_gradients(self.gradients)
+            self.clipped_gradients = [(tf.clip_by_norm(grad, 40), var) for grad, var in self.gradients]
+            self.train_op = self.optimizer.apply_gradients(self.clipped_gradients)
             self.var_norm = tf.global_norm(self.trainable_variables)
             self.grad_norm = tf.global_norm([grad for grad, var in self.gradients])
 
