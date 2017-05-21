@@ -1,0 +1,15 @@
+{
+  "env_name": "CartPole-v0",
+  "entropy_bonus": 0.0,
+  "policy_learning_rate": 0.001,
+  "batch_size": 50,
+  "max_step": 200,
+  "discount": 1.00,
+  "q_learning_rate": 0.001,
+  "target_update_rate": 0.1,
+  "q_error_threshold": 1.0,
+  "num_itr": 500,
+  "q_network_updates": 256,
+  "buffer_size": 100000,
+  "sample_size": 128
+}
